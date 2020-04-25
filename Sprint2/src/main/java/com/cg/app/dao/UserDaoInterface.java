@@ -12,10 +12,14 @@ public interface UserDaoInterface {
 
 	Boolean delete(int id);
 
-	 boolean findid(int id);
+	 boolean findId(int id);
 
-	User findByid(int id);
+	User findById(int id);
 
 	void update(User user);
+
+	User findByEmail(String email);
+
+	boolean findEmail(String email);
 
 }

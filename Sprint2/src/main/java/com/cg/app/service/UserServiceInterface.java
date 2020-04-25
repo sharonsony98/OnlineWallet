@@ -12,11 +12,15 @@ public interface UserServiceInterface {
 
 	Boolean delete(int id);
 
-	User findByid(int id);
+	User findById(int id);
 
-	boolean existsByid(int id);
+	boolean existsById(int id);
 
 	void updateData(User user);
+
+	User findByEmail(String email);
+
+	boolean existsByEmail(String email);
 
 
 }

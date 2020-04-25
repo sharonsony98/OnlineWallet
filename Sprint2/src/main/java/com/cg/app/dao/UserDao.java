@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -38,11 +39,11 @@ public class UserDao implements UserDaoInterface {
 	return false;
 	}
 	@Override
-	public User findByid(int id) {
+	public User findById(int id) {
 		return entityManager.find(User.class, id);
 	}
 	@Override
-	public boolean findid(int id){
+	public boolean findId(int id){
 		if(entityManager.contains(entityManager.find(User.class, id))){
 			return true;
 		}
@@ -58,7 +59,25 @@ public class UserDao implements UserDaoInterface {
 		  userUpdate.getPhoneNumber();
 		  userUpdate.getActive();
 		  entityManager.persist(userUpdate);
-		  System.out.println("update ");
 		
+	}
+	@Override
+	public User findByEmail(String email) {
+	    User user = null;
+	    Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email=:email");
+	    query.setParameter("email", email);
+	    try {
+	        user = (User) query.getSingleResult();
+	    } catch (Exception e) {
+	        // Handle exception
+	    }
+	    return user;
+	}
+	@Override
+	public boolean findEmail(String email){
+		if(entityManager.contains(entityManager.find(User.class, email))){
+			return true;
+		}
+		return false;
 	}
 }

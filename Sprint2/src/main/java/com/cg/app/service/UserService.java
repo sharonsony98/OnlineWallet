@@ -19,6 +19,7 @@ public class UserService implements UserServiceInterface {
 	}
 	@Override
 	public List<User> login() {
+		System.out.println(userDaoInterface.login());
 		return userDaoInterface.login();
 	}
 	@Override
@@ -26,16 +27,23 @@ public class UserService implements UserServiceInterface {
 		return userDaoInterface.delete(id);
 	}
 	@Override
-	public User findByid(int id) {
-		return userDaoInterface.findByid(id);
+	public User findById(int id) {
+		return userDaoInterface.findById(id);
 	}
 	@Override
-	public boolean existsByid(int id) {
-		return userDaoInterface.findid(id);
+	public boolean existsById(int id) {
+		return userDaoInterface.findId(id);
 	}
 	@Override
 	public void updateData(User user) {
-		userDaoInterface.update(user);
-		
+		userDaoInterface.update(user);	
+	}
+	@Override
+	public User findByEmail(String email) {
+		return userDaoInterface.findByEmail(email);
+	}
+	@Override
+	public boolean existsByEmail(String email) {
+		return userDaoInterface.findEmail(email);
 	}
 }

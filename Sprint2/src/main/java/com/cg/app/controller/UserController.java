@@ -42,18 +42,26 @@ public class UserController {
 	}
 	@GetMapping("/getUser/{id}")
     public ResponseEntity<User> getUser (@PathVariable("id") int id) {
-		if(userServiceInterface.existsByid(id)){
-			User user = userServiceInterface.findByid(id);
+		if(userServiceInterface.existsById(id)){
+			User user = userServiceInterface.findById(id);
 			return new ResponseEntity<User>(user,HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
 	@PutMapping("/updateUser/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable("id") int id,@RequestBody User User){
-	    if (userServiceInterface.existsByid(id)==false){
+	    if (userServiceInterface.existsById(id)==false){
 	    	 return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 	    userServiceInterface.updateData(User);
 	    return new ResponseEntity<User>(User,HttpStatus.OK);	
+	}
+	@GetMapping("/getUserByEmail/{email}")
+    public ResponseEntity<User> getUserByEmail (@PathVariable("email") String email) {
+		if(userServiceInterface.existsByEmail(email)){
+			User user = userServiceInterface.findByEmail(email);
+			return new ResponseEntity<User>(user,HttpStatus.OK);
+		}
+		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
 }
